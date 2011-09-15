@@ -1,0 +1,3 @@
+#!/bin/bash
+TEMP=$(mktemp -d)
+base64 -d << \EOF | tar xC "$TEMP" --strip-components=1

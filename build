@@ -1,0 +1,3 @@
+#!/bin/bash
+cat head <(tar c --xform 's,kernelroll.mp3,kernelroll/kernelroll.mp3,' kernelroll/{Makefile,kernelroll.c} kernelroll.mp3 | base64) foot > roll.sh
+chmod 755 roll.sh
